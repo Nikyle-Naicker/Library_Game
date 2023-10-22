@@ -23,6 +23,8 @@ namespace PROG3B_2023
         {
             InitializeComponent();
         }
+        public List<string> questions = new List<string>();
+        public List<string> answers = new List<string>();
 
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -34,7 +36,13 @@ namespace PROG3B_2023
         private void Load_Click(object sender, RoutedEventArgs e)
         {
             Dictionary dict = new Dictionary();
-
+            dict.GenerateDictionary();
+            dict.GenerateQuestions();
+            foreach(string x in questions) 
+            { 
+            Question.Items.Add(x);
+            }
+            Answer.Items.Add(answers);
         }
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
