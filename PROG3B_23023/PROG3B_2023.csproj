@@ -55,13 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColumnA.cs" />
     <Compile Include="Dictionary.cs" />
+    <Compile Include="Finding.xaml.cs">
+      <DependentUpon>Finding.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Identify.xaml.cs">
       <DependentUpon>Identify.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Random1.cs" />
     <Compile Include="Replace.xaml.cs">
       <DependentUpon>Replace.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tree.cs" />
+    <Compile Include="Tree2.cs" />
+    <Compile Include="Tree3.cs" />
+    <Page Include="Finding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Identify.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +122,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="3.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

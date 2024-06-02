@@ -24,61 +24,18 @@ namespace PROG3B_2023
         {
             InitializeComponent();
         }
+
         //Declarations for lists
         public List<CallNumber> mark = new List<CallNumber>();
         public List<CallNumber> numberkeep = new List<CallNumber>();
+
         private void Load_Click(object sender, RoutedEventArgs e)
         {
-            //Clears the listviews
-            Unsorted.Items.Clear();
-            Sorted.Items.Clear();
-            Numbers numbers = new Numbers();
-            // calls the generate code method
-            numbers.RandomNumber();
-            // calls the sort method
-            numbers.bubbleSort(numbers.checks);
-            mark = numbers.checks.ToList();
-            // Adds the list objects to the unsorted listview
-            foreach (CallNumber x in numbers.nums)
-            {
-                Unsorted.Items.Add(string.Join(" ", x.callNumber, x.Author));
-            }
-
+            Load();
         }
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
-            Numbers numbers = new Numbers();
-            for (int i = 0; i < Sorted.Items.Count; i++)
-            {
-                string item = Sorted.Items[i].ToString();
-                int spaceIndex = item.IndexOf(" ");
-                int callnumber = Convert.ToInt32(item.Substring(0, spaceIndex));
-                string author = item.Substring(spaceIndex + 1);
-                // Adds the user sorted list to new list
-                numberkeep.Add(new CallNumber(callnumber, author));
-            }
-            int count = 0;
-            if (numberkeep.Count == mark.Count)
-            {
-                for (int i = 0; i < mark.Count; i++)
-                {
-                    if (mark[i].callNumber.Equals(numberkeep[i].callNumber) &&
-                        numberkeep[i].Author.CompareTo(mark[i].Author) == 0)
-                    {
-                        count++;
-                    }
-                }
-            }
-            // Displays a correct notification 
-            if (numberkeep.Count == mark.Count)
-            {
-                MessageBox.Show("CORRECT", "Correct", MessageBoxButton.OK);
-            }
-            else // Displays an incorrect notification 
-            {
-                MessageBox.Show("INCORRECT", "Incorrect",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            Mark();
         }
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -156,6 +113,61 @@ namespace PROG3B_2023
                 btnMark.IsEnabled = false;
             }
 
+        }
+
+        void Load()
+        {
+            //Clears the listviews
+            Unsorted.Items.Clear();
+            Sorted.Items.Clear();
+            Numbers numbers = new Numbers();
+            // calls the generate code method
+            numbers.RandomNumber();
+            // calls the sort method
+            numbers.bubbleSort(numbers.checks);
+            mark = numbers.checks.ToList();
+            // Adds the list objects to the unsorted listview
+            foreach (CallNumber x in numbers.nums)
+            {
+                Unsorted.Items.Add(string.Join(" ", x.callNumber, x.Author));
+            }
+        }
+
+        void Mark() 
+        {
+            Numbers numbers = new Numbers();
+            for (int i = 0; i < Sorted.Items.Count; i++)
+            {
+                string item = Sorted.Items[i].ToString();
+                int spaceIndex = item.IndexOf(" ");
+                int callnumber = Convert.ToInt32(item.Substring(0, spaceIndex));
+                string author = item.Substring(spaceIndex + 1);
+                // Adds the user sorted list to new list
+                numberkeep.Add(new CallNumber(callnumber, author));
+            }
+            int count = 0;
+            if (numberkeep.Count == mark.Count)
+            {
+                for (int i = 0; i < mark.Count; i++)
+                {
+                    if (mark[i].callNumber.Equals(numberkeep[i].callNumber) &&
+                        numberkeep[i].Author.CompareTo(mark[i].Author) == 0)
+                    {
+                        count++;
+                    }
+                }
+            }
+            // Displays a correct notification 
+            if (numberkeep.Count == mark.Count)
+            {
+                MessageBox.Show("CORRECT", "Correct", MessageBoxButton.OK);
+                Load();
+            }
+            else // Displays an incorrect notification 
+            {
+                MessageBox.Show("INCORRECT", "Incorrect",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

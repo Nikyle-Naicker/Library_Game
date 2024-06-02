@@ -34,16 +34,17 @@ namespace PROG3B_2023
 
         private void Identify_Click(object sender, RoutedEventArgs e)
         {
-            //informs user
+           
            Identify identify = new Identify();
-            identify.Show();
-            this.Close();
+           identify.Show();
+           this.Close();
         }
 
         private void Call_Click(object sender, RoutedEventArgs e)
         {
-            //informs user
-            MessageBox.Show("This game has not been implemented yet", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Information);
+            Finding find = new Finding();
+            find.Show();
+            this.Close();
         }
     }
 }
