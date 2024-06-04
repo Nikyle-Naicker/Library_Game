@@ -63,7 +63,6 @@
     <Compile Include="Identify.xaml.cs">
       <DependentUpon>Identify.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Random1.cs" />
     <Compile Include="Replace.xaml.cs">
       <DependentUpon>Replace.xaml</DependentUpon>
     </Compile>
