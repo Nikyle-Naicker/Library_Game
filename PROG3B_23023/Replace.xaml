@@ -7,15 +7,23 @@
         mc:Ignorable="d"
         Title="Replace" Height="450" Width="800">
     <Grid Height="419" VerticalAlignment="Top">
-        <Label Height="35" FontSize="18" Content="Replacing Books Game" Width="200" HorizontalContentAlignment="Center" Margin="296,10,296,0" VerticalAlignment="Top"/>
-        <ProgressBar Height="20" Margin="197,50,0,0" Width="400" x:Name="Progress" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Height="20" Margin="388,50,0,0" Width="25" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
-        <Canvas Height="280" Width="600" Background="Transparent" AllowDrop="True" Margin="0,82,95,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <ListView Height="280" Width="300" BorderThickness="2" FontSize="16" x:Name="Unsorted" AllowDrop="True" MouseMove="Unsorted_MouseMove" Drop="Unsorted_Drop"/>
-            <ListView Height="280" Width="300" Canvas.Left="300" BorderThickness="2" x:Name="Sorted" AllowDrop="True" Drop="Sorted_Drop" MouseMove="Sorted_MouseMove"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Label Height="35" FontSize="18" Content="Replacing Books Game" Width="200" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+        
+        <Canvas Grid.Row="1" Height="250" Width="600" Background="Transparent" AllowDrop="True" VerticalAlignment="Top" HorizontalAlignment="Center" >
+            <ListView Height="250" Width="300" BorderThickness="2" FontSize="16" x:Name="Unsorted" AllowDrop="True" MouseMove="Unsorted_MouseMove" Drop="Unsorted_Drop"/>
+            <ListView Height="250" Width="300" Canvas.Left="300" BorderThickness="2" x:Name="Sorted" AllowDrop="True" Drop="Sorted_Drop" MouseMove="Sorted_MouseMove"/>
         </Canvas>
-        <Button Content="Load" Height="20" Width="100" Click="Load_Click" Margin="340,389,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button Content="Mark" Height="20" Width="100" Click="Mark_Click" Margin="597,389,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="btnMark"/>
-        <Button Content="Main Menu" Height="20" Width="100" Click="MainMenu_Click" Margin="97,389,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <ProgressBar Height="30" Grid.Row="2" Width="500" x:Name="Progress" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Height="30" TextAlignment="Center" Grid.Row="2" Width="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
+        <Button  Grid.Row="3" Content="Load" Height="30" Width="100" Margin="200 0 0 0" Click="Load_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Grid.Row="3" Height="30" Width="100" Content="Instructions" Margin="0 0 200 0" />
+        <Button Grid.Row="3" Margin="0 0 20 0" Content="Mark" Height="30" Width="100" Click="Mark_Click" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="btnMark"/>
+        <Button Grid.Row="3" Margin="20 0 0 0" Content="Main Menu" Height="30" Width="100" Click="MainMenu_Click" VerticalAlignment="Center" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

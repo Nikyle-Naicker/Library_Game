@@ -41,7 +41,7 @@ namespace PROG3B_2023
             Load3 load3 = new Load3();
             load3.LoadTree3();
             // Loads the random items
-            random1 random1 = new random1();
+            //random1 random1 = new random1();
             //Node tree = new Node();
 
             //// Creating a simple binary tree
