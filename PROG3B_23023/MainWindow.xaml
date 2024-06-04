@@ -7,10 +7,21 @@
         mc:Ignorable="d"
         Title="Main Menu" Height="450" Width="800">
     <Grid>
-        <Label Content="Main Menu" Width="200" Height="40" HorizontalContentAlignment="Center" FontSize="18" Margin="300,50,300,0" VerticalAlignment="Top"/>
-        <Button Content="Replacing Books Game" Height="20" Width="150"  Click="Replace_Click" Margin="321,138,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button Content="Identifying areas Game" Height="20" Width="150" Margin="321,189,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Identify_Click"/>
-        <Button Content="Finding call numbers Game" Height="20" Width="150" Margin="321,241,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="Call" Click="Call_Click" />
-        <Button Content="Close app" Height="20" Width="150" Margin="321,295,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  />
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Main Menu" Width="200" Grid.Column="1" Height="40" HorizontalContentAlignment="Center" FontSize="18" Margin="29,30,37,0" VerticalAlignment="Top"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Replacing Books Game" Height="20" Width="150"  Click="Replace_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="Identifying areas Game" Height="20" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Identify_Click"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Finding call numbers Game" Height="20" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Call" Click="Call_Click" />
     </Grid>
 </Window>
