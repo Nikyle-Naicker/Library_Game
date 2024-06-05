@@ -19,9 +19,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Main Menu" Width="200" Grid.Column="1" Height="40" HorizontalContentAlignment="Center" FontSize="18" Margin="29,30,37,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="1" Grid.Row="1" Content="Replacing Books Game" Height="20" Width="150"  Click="Replace_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Button Grid.Column="1" Grid.Row="2" Content="Identifying areas Game" Height="20" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Identify_Click"/>
-        <Button Grid.Column="1" Grid.Row="3" Content="Finding call numbers Game" Height="20" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Call" Click="Call_Click" />
+        <Label Content="Main Menu" Width="200" Grid.Column="1" Height="40" HorizontalContentAlignment="Center" FontSize="18" Margin="29,30,37,0" VerticalAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Replacing Books Game" Height="30" Width="150"  Click="Replace_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="Identifying areas Game" Height="30" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Identify_Click"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Finding call numbers Game" Height="30" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Call" Click="Call_Click" />
     </Grid>
 </Window>
