@@ -6,24 +6,24 @@
         xmlns:local="clr-namespace:PROG3B_2023"
         mc:Ignorable="d"
         Title="Replace" Height="450" Width="800">
-    <Grid Height="419" VerticalAlignment="Top">
+    <Grid Height="410" VerticalAlignment="Stretch" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Label Height="35" FontSize="18" Content="Replacing Books Game" Width="200" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
-        
-        <Canvas Grid.Row="1" Height="250" Width="600" Background="Transparent" AllowDrop="True" VerticalAlignment="Top" HorizontalAlignment="Center" >
+        <Label Height="35" FontSize="18" Content="Replacing Books Game" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="300,0,300,0"/>
+
+        <Canvas Grid.Row="1" Background="Transparent" AllowDrop="True" HorizontalAlignment="Center" Margin="0 0 600 0" VerticalAlignment="Top" >
             <ListView Height="250" Width="300" BorderThickness="2" FontSize="16" x:Name="Unsorted" AllowDrop="True" MouseMove="Unsorted_MouseMove" Drop="Unsorted_Drop"/>
             <ListView Height="250" Width="300" Canvas.Left="300" BorderThickness="2" x:Name="Sorted" AllowDrop="True" Drop="Sorted_Drop" MouseMove="Sorted_MouseMove"/>
         </Canvas>
-        <ProgressBar Height="30" Grid.Row="2" Width="500" x:Name="Progress" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ProgressBar Grid.Row="2" x:Name="Progress" Margin="150,5,150,6"/>
         <TextBlock Height="30" TextAlignment="Center" Grid.Row="2" Width="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
-        <Button  Grid.Row="3" Content="Load" Height="30" Width="100" Margin="200 0 0 0" Click="Load_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button  Grid.Row="3" Content="Start" Width="100" Margin="450,26,0,26" Click="Load_Click" HorizontalAlignment="Left"/>
         <Button Grid.Row="3" Height="30" Width="100" Content="Instructions" Margin="0 0 200 0" />
-        <Button Grid.Row="3" Margin="0 0 20 0" Content="Mark" Height="30" Width="100" Click="Mark_Click" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="btnMark"/>
-        <Button Grid.Row="3" Margin="20 0 0 0" Content="Main Menu" Height="30" Width="100" Click="MainMenu_Click" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Button Grid.Row="3" Margin="680,26,20,26" Content="Mark" Width="100" Height="30" Click="Mark_Click" x:Name="btnMark"/>
+        <Button Grid.Row="3" Margin="20,0,0,0" Content="Main Menu" Width="100" Click="MainMenu_Click" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center"/>
     </Grid>
 </Window>

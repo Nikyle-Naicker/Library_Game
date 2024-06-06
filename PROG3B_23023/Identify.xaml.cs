@@ -25,7 +25,6 @@ namespace PROG3B_2023
         public Identify()
         {
             InitializeComponent();
-            MessageBox.Show("Click start for the game to begin, then select a pair of matching values and click match", "Instructions", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         //Declarations
         public List<string> questions = new List<string>();
@@ -35,36 +34,23 @@ namespace PROG3B_2023
         public string itemq, itema;
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            //takes the user back to the main menu
-            MainWindow main = new MainWindow();
-            main.Show();
-            this.Close();
+            MainMenu();
+            
         }
+
+
+        private void Instruction_Click(object sender, RoutedEventArgs e)
+        {
+            ShowInstructions();
+        }
+
+
         private void Load_Click(object sender, RoutedEventArgs e)
         {
-            count++;
-            //Controls whether the callnumbers or description have extra options
-            if(Question.Items.Count < 1) 
-            {
-                progcount = 0;
-                Progess.Value = 0;
-                if (count == 1) 
-                { 
-                //Generates callnumbers and excess descriptions
-                GenerateQuestions();
-                }
-                else
-                {
-                //Generates descriptions and excess callnumbers
-                count = 0;
-                GenerateAnswers();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please complete the current questions before loading more", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            CanQuestionsGenerate();
         }
+
+
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
             GetSelectedValues();
@@ -78,6 +64,34 @@ namespace PROG3B_2023
                 MessageBox.Show("Please select matching terms from both columns", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+
+        void CanQuestionsGenerate()
+        {
+            count++;
+            //Controls whether the callnumbers or description have extra options
+            if (Question.Items.Count < 1)
+            {
+                progcount = 0;
+                Progess.Value = 0;
+                if (count == 1)
+                {
+                    //Generates callnumbers and excess descriptions
+                    GenerateQuestions();
+                }
+                else
+                {
+                    //Generates descriptions and excess callnumbers
+                    count = 0;
+                    GenerateAnswers();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please complete the current questions before loading more", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
         public void GenerateQuestions()
         {
             //Clears the listviews and lists
@@ -86,31 +100,27 @@ namespace PROG3B_2023
             questions.Clear();
             answers.Clear();
             Dictionary dict = new Dictionary();
-            int z = 9;
+            int potentialAnswers = 9;
             dict.GenerateDictionary();
             Random rand = new Random();
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
             {
-                int x = rand.Next(z);
-                string y = dict.Identifies.ElementAt(x).Value;
-                string z2 = dict.Identifies.ElementAt(x).Key;
+                int x = rand.Next(potentialAnswers);
                 //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(z2);
-                z--;
+                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Key);
+                potentialAnswers--;
                 //Adds the descriptions and callnumbers to the lists
-                answers.Add(y);
-                questions.Add(z2);
+                answers.Add(dict.Identifies.ElementAt(x).Value);
+                questions.Add(dict.Identifies.ElementAt(x).Key);
             }
             //Generates the excess descriptions
             for (int i = 0; i < 3; i++)
             {
-                int a = rand.Next(z);
-                string c = dict.Identifies.ElementAt(a).Key;
-                string b = dict.Identifies.ElementAt(a).Value;
-                dict.Identifies.Remove(c);
-                answers.Add(b);
-                z--;
+                int a = rand.Next(potentialAnswers);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Key);
+                answers.Add(dict.Identifies.ElementAt(a).Value);
+                potentialAnswers--;
             }
                 foreach (string a in questions)
             {
@@ -121,6 +131,8 @@ namespace PROG3B_2023
                 Answer.Items.Add(num2);
             }
         }
+
+
         public void GenerateAnswers()
         {
             //Clears the listviews and lists
@@ -167,6 +179,8 @@ namespace PROG3B_2023
                 Answer.Items.Add(num2);
             }
         }
+
+
         public void GetSelectedValues()
         {
             //checks if the are selected items
@@ -183,7 +197,11 @@ namespace PROG3B_2023
                 itema = a.ToString();
             }
         }
+
+
         public string value;
+
+
         public void Mark1()
         {
             Dictionary dict = new Dictionary();
@@ -202,6 +220,14 @@ namespace PROG3B_2023
                        Question.Items.Remove(kvp.Key);
                        Answer.Items.Remove(kvp.Value);
                        Progess.Value = progcount * 20;
+                       if (Question.Items.Count == 0)
+                       {
+                           MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                           if (dialogResult == MessageBoxResult.Yes)
+                           {
+                               CanQuestionsGenerate();
+                           }
+                       }
                     }
                     else
                     {
@@ -221,6 +247,14 @@ namespace PROG3B_2023
                         //Removes the values from the listviews
                         Question.Items.Remove(kvp.Value);
                         Answer.Items.Remove(kvp.Key);
+                        if(Question.Items.Count == 0)
+                        {
+                            MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                            if (dialogResult == MessageBoxResult.Yes)
+                            {
+                                CanQuestionsGenerate();
+                            }
+                        }
                     }
                     else
                     {
@@ -229,5 +263,21 @@ namespace PROG3B_2023
                 }
             }
         }
+
+        void ShowInstructions()
+        {
+            MessageBox.Show("Click start for the game to begin, then select a pair of matching values and click match",
+                "Instructions", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+
+        void MainMenu()
+        {
+            //takes the user back to the main menu
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
+
     }
 }
