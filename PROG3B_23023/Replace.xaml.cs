@@ -35,7 +35,10 @@ namespace PROG3B_2023
         }
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
-            Mark();
+            if(Check() == true)
+            {
+                Mark();
+            }
         }
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -133,9 +136,23 @@ namespace PROG3B_2023
             }
         }
 
-        void Mark() 
+        bool Check()
         {
             Numbers numbers = new Numbers();
+            if(Unsorted.Items.Count == 0 && Sorted.Items.Count == 0)
+            {
+                MessageBox.Show("Please click the Start button to begin the game", "Invalid", MessageBoxButton.OK);
+                return false;
+            }
+            else if(Sorted.Items.Count < 9)
+            {
+                MessageBox.Show("Please sort the numbers before clicking mark", "Incomplete", MessageBoxButton.OK);
+                return false;
+            }
+            return true;
+        }
+        void Mark() 
+        {
             for (int i = 0; i < Sorted.Items.Count; i++)
             {
                 string item = Sorted.Items[i].ToString();
@@ -161,12 +178,14 @@ namespace PROG3B_2023
             if (numberkeep.Count == mark.Count)
             {
                 MessageBox.Show("CORRECT", "Correct", MessageBoxButton.OK);
+                numberkeep.Clear();
                 Load();
             }
             else // Displays an incorrect notification 
             {
                 MessageBox.Show("INCORRECT", "Incorrect",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                numberkeep.Clear();
             }
         }
     }
