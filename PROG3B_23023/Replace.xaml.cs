@@ -48,6 +48,11 @@ namespace PROG3B_2023
             this.Close();
             
         }
+
+        private void Instructions_Click(object sender, RoutedEventArgs e)
+        {
+            ShowInstructions();
+        }
         private void Unsorted_MouseMove(object sender, MouseEventArgs e)
         {
             // Handles logic for when user clicks and drags item
@@ -188,5 +193,12 @@ namespace PROG3B_2023
                 numberkeep.Clear();
             }
         }
+
+        void ShowInstructions()
+        {
+            MessageBox.Show("Click start for the game to begin, sort the call numbers into Ascending order, by dragging them into the box call sorted",
+                "Instructions", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
     }
 }

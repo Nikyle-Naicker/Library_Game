@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -26,12 +27,13 @@ namespace PROG3B_2023
         {
             InitializeComponent();
         }
+
         //Declarations
         public List<string> questions = new List<string>();
         public List<string> answers = new List<string>();
         public int count = 0;
         public int progcount;
-        public string itemq, itema;
+        public string question, answer;
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             MainMenu();
@@ -53,16 +55,7 @@ namespace PROG3B_2023
 
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
-            GetSelectedValues();
-            // check that the user has selected values from both listviews
-            if(itemq != null && itema != null)
-            {
-                Mark1();
-            }
-            else
-            {
-                MessageBox.Show("Please select matching terms from both columns", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            CanMark();
         }
 
 
@@ -94,6 +87,7 @@ namespace PROG3B_2023
 
         public void GenerateQuestions()
         {
+
             //Clears the listviews and lists
             Question.Items.Clear();
             Answer.Items.Clear();
@@ -101,40 +95,67 @@ namespace PROG3B_2023
             answers.Clear();
             Dictionary dict = new Dictionary();
             int potentialAnswers = 9;
+            int randomQuestion = 5;
+            int randomAnswer = 8;
             dict.GenerateDictionary();
             Random rand = new Random();
+
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
             {
                 int x = rand.Next(potentialAnswers);
-                //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Key);
-                potentialAnswers--;
                 //Adds the descriptions and callnumbers to the lists
                 answers.Add(dict.Identifies.ElementAt(x).Value);
                 questions.Add(dict.Identifies.ElementAt(x).Key);
+                //removes the entry from the dictionary to prevent it from being used again
+                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Value);
+                potentialAnswers--;
             }
+
             //Generates the excess descriptions
             for (int i = 0; i < 3; i++)
             {
                 int a = rand.Next(potentialAnswers);
-                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Key);
                 answers.Add(dict.Identifies.ElementAt(a).Value);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Value);
                 potentialAnswers--;
             }
-                foreach (string a in questions)
+
+            for (int i = 0; i < 7; i++)
             {
-                Question.Items.Add(a);
+                int y = rand.Next(randomAnswer);
+                Answer.Items.Add(answers[y]);
+                answers.RemoveAt(y);
+                randomAnswer--;
             }
-            foreach (string num2 in answers)
+            Answer.Items.Add(answers[0]);
+
+            for (int i = 0; i < 4; i++)
             {
-                Answer.Items.Add(num2);
+                int y = rand.Next(randomQuestion);
+                Question.Items.Add(questions[y]);
+                questions.RemoveAt(y);
+                randomQuestion--;
             }
+            Question.Items.Add(questions[0]);
+
+            //foreach (string a in questions)
+            //{
+            //    Question.Items.Add(a);
+            //}
+
+            //foreach (string num2 in answers)
+            //{
+            //    Answer.Items.Add(num2);
+            //}
         }
 
 
         public void GenerateAnswers()
         {
+
             //Clears the listviews and lists
             Question.Items.Clear();
             Answer.Items.Clear();
@@ -142,42 +163,64 @@ namespace PROG3B_2023
             answers.Clear();
             Dictionary dict = new Dictionary();
             int z = 9;
+            int randomQuestion = 5;
+            int randomAnswer = 8;
             dict.GenerateDictionary();
             Random rand = new Random();
+
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
             {
                 int x = rand.Next(z);
-                string y = dict.Identifies.ElementAt(x).Value;
-                string z2 = dict.Identifies.ElementAt(x).Key;
-                //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(z2);
-                z--;
                 //Adds the descriptions and callnumbers to the lists
-                answers.Add(z2);
-                questions.Add(y);
+                answers.Add(dict.Identifies.ElementAt(x).Key);
+                questions.Add(dict.Identifies.ElementAt(x).Value);
+                //removes the entry from the dictionary to prevent it from being used again
+                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Value);
+                z--;
             }
+
             //Generates the excess callnumbers
             for (int i = 0; i < 3; i++)
             {
                 int a = rand.Next(z);
-                string c = dict.Identifies.ElementAt(a).Key;
-                string b = dict.Identifies.ElementAt(a).Value;
-                answers.Add(c);
+                answers.Add(dict.Identifies.ElementAt(a).Key);
                 //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(c);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Value);
                 z--;
             }
-            foreach (string a in questions)
+
+            for(int i = 0;i < 4; i++)
             {
-                //adds each description to the first listview
-                Question.Items.Add(a);
+                int y = rand.Next(randomQuestion);
+                Question.Items.Add(questions[y]);
+                questions.RemoveAt(y);
+                randomQuestion--;
             }
-            foreach (string num2 in answers)
+            Question.Items.Add(questions[0]); 
+
+            //foreach (string a in questions)
+            //{
+            //    //adds each description to the first listview
+            //    Question.Items.Add(a);
+            //}
+
+            for (int i = 0; i < 7; i++)
             {
-                //adds each call number to the second listview
-                Answer.Items.Add(num2);
+                int y = rand.Next(randomAnswer);
+                Answer.Items.Add(answers[y]);
+                answers.RemoveAt(y);
+                randomAnswer--;
             }
+            Answer.Items.Add(answers[0]);
+
+            //foreach (string num2 in answers)
+            //{
+            //    //adds each call number to the second listview
+            //    Answer.Items.Add(num2);
+            //}
         }
 
 
@@ -188,37 +231,54 @@ namespace PROG3B_2023
             {
                 //gets the value from the listview and stores it in a variable
                 var q = Question.SelectedItems[0];
-                itemq = q.ToString();
+                question = q.ToString();
             }
             if(Answer.SelectedItems.Count > 0)
             {
                 //gets the value from the listview and stores it in a variable
                 var a = Answer.SelectedItems[0];
-                itema = a.ToString();
+                answer = a.ToString();
             }
         }
 
 
-        public string value;
+        
 
+        void CanMark()
+        {
+            GetSelectedValues();
+            // check that the user has selected values from both listviews
+            if (question != null && answer != null)
+            {
+                Mark();
+            }
+            else
+            {
+                MessageBox.Show("Please select matching terms from both columns", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
 
-        public void Mark1()
+        public void Mark()
         {
             Dictionary dict = new Dictionary();
             dict.GenerateDictionary();
+            string value;
             if (count == 1) {
-                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(itemq, itema);
+
+                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(question, answer);
                 //Gets the correct value from the dictionary
                 if (dict.Identifies.TryGetValue(kvp.Key, out value))
                 {
+
                     //compares the dictionary value to the selected value
-                    if (itema == value.ToString())
+                    if (answer == value.ToString())
                     {
-                       MessageBox.Show("Correct");
+
+                       MessageBox.Show("Correct", "Correct", MessageBoxButton.OK);
                        progcount++;
                        //Removes the items from the listviews
                        Question.Items.Remove(kvp.Key);
-                       Answer.Items.Remove(kvp.Value);
+                       Answer.Items.Remove(kvp.Value); 
                        Progess.Value = progcount * 20;
                        if (Question.Items.Count == 0)
                        {
@@ -231,19 +291,21 @@ namespace PROG3B_2023
                     }
                     else
                     {
-                       MessageBox.Show("Incorrect, Please try again");
+                       MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
             else
             {
-                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(itema, itemq);
+                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(answer, question);
                 if (dict.Identifies.TryGetValue(kvp.Key, out value))
                 {
                     // compares the selected value and the value from the dictionary
-                    if (itemq == value.ToString())
+                    if (question == value.ToString())
                     {
                         MessageBox.Show("Correct");
+                        progcount++;
+                        Progess.Value = progcount * 20;
                         //Removes the values from the listviews
                         Question.Items.Remove(kvp.Value);
                         Answer.Items.Remove(kvp.Key);
@@ -258,7 +320,7 @@ namespace PROG3B_2023
                     }
                     else
                     {
-                        MessageBox.Show("Incorrect, Please try again");
+                        MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
