@@ -8,12 +8,14 @@
         Title="Identify" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Identifying Areas" x:Name="Header" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"  />
-        <ProgressBar Height="20" Width="500" Margin="150,57,150,10" x:Name="Progess"  />
+        <TextBlock Height="30" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="35" FontSize="20" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
+        <ProgressBar Height="20" Grid.Row="2" Width="500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Progess"  />
         <Grid Grid.Row="1">
             <ListView BorderThickness="2" Margin="5 0 0 0" Name="Question" SelectedItem="{Binding selectedQuestion, Mode=TwoWay}" />
             <ListView Grid.Column="1" BorderThickness="2" Margin="0 0 5 0" x:Name="Answer" SelectedItem="{Binding selectedAnswer, Mode=TwoWay}" />
@@ -22,7 +24,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

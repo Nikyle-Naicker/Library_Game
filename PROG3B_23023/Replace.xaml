@@ -20,9 +20,9 @@
             <ListView Height="250" Width="300" Canvas.Left="300" BorderThickness="2" x:Name="Sorted" AllowDrop="True" Drop="Sorted_Drop" MouseMove="Sorted_MouseMove"/>
         </Canvas>
         <ProgressBar Grid.Row="2" x:Name="Progress" Margin="150,5,150,6"/>
-        <TextBlock Height="30" TextAlignment="Center" Grid.Row="2" Width="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
+        <TextBlock Height="30" TextAlignment="Center" Grid.Row="2" Width="35" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
         <Button  Grid.Row="3" Content="Start" Width="100" Margin="450,26,0,26" Click="Load_Click" HorizontalAlignment="Left"/>
-        <Button Grid.Row="3" Height="30" Width="100" Content="Instructions" Margin="0 0 200 0" />
+        <Button Grid.Row="3" Height="30" Width="100" Content="Instructions" Click="Instructions_Click" Margin="0 0 200 0" />
         <Button Grid.Row="3" Margin="680,26,20,26" Content="Mark" Width="100" Height="30" Click="Mark_Click" x:Name="btnMark"/>
         <Button Grid.Row="3" Margin="20,0,0,0" Content="Main Menu" Width="100" Click="MainMenu_Click" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center"/>
     </Grid>
