@@ -66,7 +66,7 @@ namespace PROG3B_2023
             if (Question.Items.Count < 1)
             {
                 progcount = 0;
-                Progess.Value = 0;
+                Progress.Value = 0;
                 if (count == 1)
                 {
                     //Generates callnumbers and excess descriptions
@@ -99,6 +99,9 @@ namespace PROG3B_2023
             int randomAnswer = 8;
             dict.GenerateDictionary();
             Random rand = new Random();
+
+            questionHeading.Content = "Class Number";
+            answerHeading.Content = "Description";
 
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
@@ -140,16 +143,6 @@ namespace PROG3B_2023
                 randomQuestion--;
             }
             Question.Items.Add(questions[0]);
-
-            //foreach (string a in questions)
-            //{
-            //    Question.Items.Add(a);
-            //}
-
-            //foreach (string num2 in answers)
-            //{
-            //    Answer.Items.Add(num2);
-            //}
         }
 
 
@@ -167,6 +160,9 @@ namespace PROG3B_2023
             int randomAnswer = 8;
             dict.GenerateDictionary();
             Random rand = new Random();
+
+            questionHeading.Content = "Description";
+            answerHeading.Content = "Class Number";
 
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
@@ -201,12 +197,6 @@ namespace PROG3B_2023
             }
             Question.Items.Add(questions[0]); 
 
-            //foreach (string a in questions)
-            //{
-            //    //adds each description to the first listview
-            //    Question.Items.Add(a);
-            //}
-
             for (int i = 0; i < 7; i++)
             {
                 int y = rand.Next(randomAnswer);
@@ -215,12 +205,6 @@ namespace PROG3B_2023
                 randomAnswer--;
             }
             Answer.Items.Add(answers[0]);
-
-            //foreach (string num2 in answers)
-            //{
-            //    //adds each call number to the second listview
-            //    Answer.Items.Add(num2);
-            //}
         }
 
 
@@ -278,8 +262,8 @@ namespace PROG3B_2023
                        progcount++;
                        //Removes the items from the listviews
                        Question.Items.Remove(kvp.Key);
-                       Answer.Items.Remove(kvp.Value); 
-                       Progess.Value = progcount * 20;
+                       Answer.Items.Remove(kvp.Value);
+                       Progress.Value = progcount * 20;
                        if (Question.Items.Count == 0)
                        {
                            MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -305,7 +289,7 @@ namespace PROG3B_2023
                     {
                         MessageBox.Show("Correct");
                         progcount++;
-                        Progess.Value = progcount * 20;
+                        Progress.Value = progcount * 20;
                         //Removes the values from the listviews
                         Question.Items.Remove(kvp.Value);
                         Answer.Items.Remove(kvp.Key);

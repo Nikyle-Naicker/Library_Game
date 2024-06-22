@@ -42,9 +42,7 @@ namespace PROG3B_2023
 
         private void Call_Click(object sender, RoutedEventArgs e)
         {
-            Finding find = new Finding();
-            find.Show();
-            this.Close();
+            MessageBox.Show("Game currently in development check back later", "", MessageBoxButton.OK, MessageBoxImage.Hand);
         }
     }
 }
