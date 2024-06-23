@@ -29,11 +29,12 @@ namespace PROG3B_2023
         }
 
         //Declarations
-        public List<string> questions = new List<string>();
-        public List<string> answers = new List<string>();
-        public int count = 0;
-        public int progcount;
-        public string question, answer;
+        List<string> questions = new List<string>();
+        List<string> answers = new List<string>();
+        int count = 0;
+        int progcount;
+        string question, answer;
+
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             MainMenu();
@@ -58,25 +59,23 @@ namespace PROG3B_2023
             CanMark();
         }
 
-
+        /* This method controls whether the application generates classes
+           or descriptions in the left column.*/
         void CanQuestionsGenerate()
         {
             count++;
-            //Controls whether the callnumbers or description have extra options
             if (Question.Items.Count < 1)
             {
                 progcount = 0;
                 Progress.Value = 0;
                 if (count == 1)
                 {
-                    //Generates callnumbers and excess descriptions
-                    GenerateQuestions();
+                    GenerateClasses();
                 }
                 else
                 {
-                    //Generates descriptions and excess callnumbers
                     count = 0;
-                    GenerateAnswers();
+                    GenerateDescriptions();
                 }
             }
             else
@@ -85,19 +84,20 @@ namespace PROG3B_2023
             }
         }
 
-        public void GenerateQuestions()
+        /* Generates 5 class numbers with matching descriptions,
+           3 excess descriptions and assigns them to the listviews*/
+        public void GenerateClasses()
         {
-
-            //Clears the listviews and lists
             Question.Items.Clear();
             Answer.Items.Clear();
             questions.Clear();
             answers.Clear();
+
             Dictionary dict = new Dictionary();
+            dict.GenerateDictionary();
             int potentialAnswers = 9;
             int randomQuestion = 5;
             int randomAnswer = 8;
-            dict.GenerateDictionary();
             Random rand = new Random();
 
             questionHeading.Content = "Class Number";
@@ -106,56 +106,67 @@ namespace PROG3B_2023
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
             {
-                int x = rand.Next(potentialAnswers);
-                //Adds the descriptions and callnumbers to the lists
-                answers.Add(dict.Identifies.ElementAt(x).Value);
-                questions.Add(dict.Identifies.ElementAt(x).Key);
-                //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Key);
-                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Value);
+                int randomNumber = rand.Next(potentialAnswers);
+
+                answers.Add(dict.Identifies.ElementAt(randomNumber).Value);
+                questions.Add(dict.Identifies.ElementAt(randomNumber).Key);
+
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Value);
+
                 potentialAnswers--;
             }
 
             //Generates the excess descriptions
             for (int i = 0; i < 3; i++)
             {
-                int a = rand.Next(potentialAnswers);
-                answers.Add(dict.Identifies.ElementAt(a).Value);
-                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Key);
-                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Value);
+                int randomNumber = rand.Next(potentialAnswers);
+
+                answers.Add(dict.Identifies.ElementAt(randomNumber).Value);
+
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Value);
+
                 potentialAnswers--;
             }
 
+            //Assigns the descriptions in a random order
             for (int i = 0; i < 7; i++)
             {
-                int y = rand.Next(randomAnswer);
-                Answer.Items.Add(answers[y]);
-                answers.RemoveAt(y);
+                int randomNumber = rand.Next(randomAnswer);
+
+                Answer.Items.Add(answers[randomNumber]);
+                answers.RemoveAt(randomNumber);
+
                 randomAnswer--;
             }
             Answer.Items.Add(answers[0]);
 
+            //Assigns the callnumber in a random order
             for (int i = 0; i < 4; i++)
             {
-                int y = rand.Next(randomQuestion);
-                Question.Items.Add(questions[y]);
-                questions.RemoveAt(y);
+                int randomNumber = rand.Next(randomQuestion);
+
+                Question.Items.Add(questions[randomNumber]);
+                questions.RemoveAt(randomNumber);
+
                 randomQuestion--;
             }
             Question.Items.Add(questions[0]);
         }
 
-
-        public void GenerateAnswers()
+        /* Generates 5 descriptions with matching class numbers,
+           3 excess class numbers and assigns them to the listviews*/
+        public void GenerateDescriptions()
         {
 
-            //Clears the listviews and lists
             Question.Items.Clear();
             Answer.Items.Clear();
             questions.Clear();
             answers.Clear();
+
             Dictionary dict = new Dictionary();
-            int z = 9;
+            int potentialAnswer = 9;
             int randomQuestion = 5;
             int randomAnswer = 8;
             dict.GenerateDictionary();
@@ -167,41 +178,47 @@ namespace PROG3B_2023
             // Generates the five pairs of descriptions and matching callnumbers
             for (int i = 0; i < 5; i++)
             {
-                int x = rand.Next(z);
-                //Adds the descriptions and callnumbers to the lists
-                answers.Add(dict.Identifies.ElementAt(x).Key);
-                questions.Add(dict.Identifies.ElementAt(x).Value);
-                //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Key);
-                dict.Identifies.Remove(dict.Identifies.ElementAt(x).Value);
-                z--;
+                int randomNumber = rand.Next(potentialAnswer);
+
+                answers.Add(dict.Identifies.ElementAt(randomNumber).Key);
+                questions.Add(dict.Identifies.ElementAt(randomNumber).Value);
+
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Value);
+                potentialAnswer--;
             }
 
             //Generates the excess callnumbers
             for (int i = 0; i < 3; i++)
             {
-                int a = rand.Next(z);
-                answers.Add(dict.Identifies.ElementAt(a).Key);
-                //removes the entry from the dictionary to prevent it from being used again
-                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Key);
-                dict.Identifies.Remove(dict.Identifies.ElementAt(a).Value);
-                z--;
+                int randomNumber = rand.Next(potentialAnswer);
+                answers.Add(dict.Identifies.ElementAt(randomNumber).Key);
+
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Key);
+                dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Value);
+                potentialAnswer--;
             }
 
-            for(int i = 0;i < 4; i++)
+            //Assigns the descriptions in a random order
+            for (int i = 0;i < 4; i++)
             {
-                int y = rand.Next(randomQuestion);
-                Question.Items.Add(questions[y]);
-                questions.RemoveAt(y);
+                int randomNumber = rand.Next(randomQuestion);
+
+                Question.Items.Add(questions[randomNumber]);
+                questions.RemoveAt(randomNumber);
+
                 randomQuestion--;
             }
-            Question.Items.Add(questions[0]); 
+            Question.Items.Add(questions[0]);
 
+            //Assigns the callnumbers in a random order
             for (int i = 0; i < 7; i++)
             {
-                int y = rand.Next(randomAnswer);
-                Answer.Items.Add(answers[y]);
-                answers.RemoveAt(y);
+                int randomNumber = rand.Next(randomAnswer);
+
+                Answer.Items.Add(answers[randomNumber]);
+                answers.RemoveAt(randomNumber);
+
                 randomAnswer--;
             }
             Answer.Items.Add(answers[0]);
@@ -214,24 +231,21 @@ namespace PROG3B_2023
             if (Question.SelectedItems.Count > 0)
             {
                 //gets the value from the listview and stores it in a variable
-                var q = Question.SelectedItems[0];
-                question = q.ToString();
+                var selectedQuestion = Question.SelectedItems[0];
+                question = selectedQuestion.ToString();
             }
             if(Answer.SelectedItems.Count > 0)
             {
                 //gets the value from the listview and stores it in a variable
-                var a = Answer.SelectedItems[0];
-                answer = a.ToString();
+                var selectedAnswer = Answer.SelectedItems[0];
+                answer = selectedAnswer.ToString();
             }
         }
-
-
         
-
+        //Checks to see that items from both columns have been selected
         void CanMark()
         {
             GetSelectedValues();
-            // check that the user has selected values from both listviews
             if (question != null && answer != null)
             {
                 Mark();
@@ -242,6 +256,8 @@ namespace PROG3B_2023
             }
         }
 
+        /* Checks to see if the selected values match and display the result
+         * to the user*/
         public void Mark()
         {
             Dictionary dict = new Dictionary();
@@ -251,75 +267,74 @@ namespace PROG3B_2023
 
                 KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(question, answer);
                 //Gets the correct value from the dictionary
-                if (dict.Identifies.TryGetValue(kvp.Key, out value))
+                dict.Identifies.TryGetValue(kvp.Key, out value);
+
+                //compares the dictionary value to the selected value
+                if (answer == value.ToString())
                 {
 
-                    //compares the dictionary value to the selected value
-                    if (answer == value.ToString())
-                    {
+                    MessageBox.Show("Correct", "Correct", MessageBoxButton.OK);
+                    progcount++;
 
-                       MessageBox.Show("Correct", "Correct", MessageBoxButton.OK);
-                       progcount++;
-                       //Removes the items from the listviews
-                       Question.Items.Remove(kvp.Key);
-                       Answer.Items.Remove(kvp.Value);
-                       Progress.Value = progcount * 20;
-                       if (Question.Items.Count == 0)
-                       {
-                           MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                           if (dialogResult == MessageBoxResult.Yes)
-                           {
-                               CanQuestionsGenerate();
-                           }
-                       }
-                    }
-                    else
+                    Question.Items.Remove(kvp.Key);
+                    Answer.Items.Remove(kvp.Value);
+                    Progress.Value = progcount * 20;
+                    if (Question.Items.Count == 0)
                     {
-                       MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (dialogResult == MessageBoxResult.Yes)
+                        {
+                            CanQuestionsGenerate();
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+               
             }
             else
             {
                 KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(answer, question);
-                if (dict.Identifies.TryGetValue(kvp.Key, out value))
+                dict.Identifies.TryGetValue(kvp.Key, out value);
+        
+                // compares the selected value and the value from the dictionary
+                if (question == value.ToString())
                 {
-                    // compares the selected value and the value from the dictionary
-                    if (question == value.ToString())
+                    MessageBox.Show("Correct");
+                    progcount++;
+                    Progress.Value = progcount * 20;
+
+                    Question.Items.Remove(kvp.Value);
+                    Answer.Items.Remove(kvp.Key);
+                    if(Question.Items.Count == 0)
                     {
-                        MessageBox.Show("Correct");
-                        progcount++;
-                        Progress.Value = progcount * 20;
-                        //Removes the values from the listviews
-                        Question.Items.Remove(kvp.Value);
-                        Answer.Items.Remove(kvp.Key);
-                        if(Question.Items.Count == 0)
+                        MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (dialogResult == MessageBoxResult.Yes)
                         {
-                            MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                            if (dialogResult == MessageBoxResult.Yes)
-                            {
-                                CanQuestionsGenerate();
-                            }
+                            CanQuestionsGenerate();
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
                 }
+                else
+                {
+                    MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }
         }
 
+        //Displays instructions to the user
         void ShowInstructions()
         {
             MessageBox.Show("Click start for the game to begin, then select a pair of matching values and click match",
                 "Instructions", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-
+        //takes the user back to the main menu
         void MainMenu()
         {
-            //takes the user back to the main menu
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
