@@ -7,9 +7,12 @@ using System.Windows.Documents;
 
 namespace PROG3B_2023
 {
+
+    // Generates the random callnumbers that are returned in a List
+
     class Numbers
     {
-        // declares lists and parameters
+        
         public List<CallNumber> nums = new List<CallNumber>();
         int y;
         public List<CallNumber> RandomNumber()
