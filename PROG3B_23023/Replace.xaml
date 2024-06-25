@@ -17,11 +17,6 @@
 
         <Canvas Grid.Row="1" Background="Transparent" AllowDrop="True" HorizontalAlignment="Center" Margin="0 0 600 0" VerticalAlignment="Top" >
             <ListView Height="250" Width="300" BorderThickness="2" FontSize="16" x:Name="Unsorted" VerticalContentAlignment="Stretch" AllowDrop="True" MouseMove="Unsorted_MouseMove" Drop="Unsorted_Drop">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
             </ListView>
             <ListView Height="250" Width="300" Canvas.Left="300" BorderThickness="2" x:Name="Sorted" AllowDrop="True" Drop="Sorted_Drop" MouseMove="Sorted_MouseMove"/>
         </Canvas>

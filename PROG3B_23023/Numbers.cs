@@ -11,9 +11,8 @@ namespace PROG3B_2023
     {
         // declares lists and parameters
         public List<CallNumber> nums = new List<CallNumber>();
-        public List<CallNumber> checks = new List<CallNumber>();
         int y;
-        public void RandomNumber()
+        public List<CallNumber> RandomNumber()
         {
             // declarations
             StringBuilder builder = new StringBuilder();
@@ -41,24 +40,8 @@ namespace PROG3B_2023
                 y = Convert.ToInt32(builder.ToString());
                 // adds the values to the lists
                 nums.Add(new CallNumber(y, strbuilder.ToString()));
-                checks.Add(new CallNumber(y, strbuilder.ToString()));
             }
-        }
-        public void bubbleSort(List<CallNumber> checks)
-        {
-            //Sorts the second list
-            for (int i = 0; i < checks.Count - 1; i++)
-            {
-                for (int k = (i + 1); k < checks.Count; k++)
-                {
-                    if (checks[i].CompareTo(checks[k]) == 1)
-                    {
-                        CallNumber temp = checks[i];
-                        checks[i] = checks[k];
-                        checks[k] = temp;
-                    }
-                }
-            }
+            return nums;
         }
     }
 }
