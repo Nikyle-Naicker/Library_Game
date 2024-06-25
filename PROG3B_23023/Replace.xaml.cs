@@ -25,7 +25,7 @@ namespace PROG3B_2023
             InitializeComponent();
         }
 
-        //Declarations for lists
+        //Declarations
         public List<CallNumber> numberkeep = new List<CallNumber>();
         public List<CallNumber> number = new List<CallNumber>();
         private void Load_Click(object sender, RoutedEventArgs e)
@@ -77,10 +77,6 @@ namespace PROG3B_2023
                 Sorted.Items.Remove(Sorted.SelectedItem);
             }
 
-            if (Sorted.Items.Count > 0)
-            {
-                btnMark.IsEnabled = true;
-            }
         }
 
         private void Sorted_MouseMove(object sender, MouseEventArgs e)
@@ -111,12 +107,9 @@ namespace PROG3B_2023
                 Unsorted.Items.Remove(Sorted.SelectedItem);
                 Unsorted.Items.Remove(Unsorted.SelectedItem);
             }
-            if (Sorted.Items.Count < 1)
-            {
-                btnMark.IsEnabled = false;
-            }
 
         }
+        // Receives the random callnumbers and adds them to the listview randomly
 
         void Load()
         {
@@ -133,6 +126,7 @@ namespace PROG3B_2023
             }
         }
 
+        //Checks to see if the user has completed the task correctly
         bool Check()
         {
             Numbers numbers = new Numbers();
@@ -148,6 +142,9 @@ namespace PROG3B_2023
             }
             return true;
         }
+
+        /* This method adds the callnumbers back into a list, sorts the callnumbers,
+         then it compares two lists to see if they have the same order and displays the result to the user*/
         void Mark() 
         {
             number.Clear();

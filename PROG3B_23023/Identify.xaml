@@ -16,7 +16,8 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Identifying Areas" x:Name="Header" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"  />
         <TextBlock Height="30" Grid.Row="3" VerticalAlignment="Center" Panel.ZIndex="1" HorizontalAlignment="Center" TextAlignment="Center" Width="50" FontSize="20" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
-        <ProgressBar Height="20" Grid.Row="3" MinWidth="500" VerticalAlignment="Center" MaxWidth="1200" x:Name="Progress" Margin="150,0,150,0"  />
+        <ProgressBar Height="20" Grid.Row="3" 
+                     VerticalAlignment="Center" MaxWidth="1200" x:Name="Progress" Margin="150,0,150,0"  />
         <Grid Grid.Row="2">
             <ListView BorderThickness="2" Margin="5 0 0 0" Name="Question" SelectedItem="{Binding selectedQuestion, Mode=TwoWay}" />
             <ListView Grid.Column="1" BorderThickness="2" Margin="0 0 5 0" x:Name="Answer" SelectedItem="{Binding selectedAnswer, Mode=TwoWay}" />

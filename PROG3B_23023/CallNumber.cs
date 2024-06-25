@@ -8,6 +8,7 @@ namespace PROG3B_2023
 {
     public class CallNumber 
     {
+        //Model for the callnumber 
         public int callNumber { get; set; }
         public string Author { get; set; }
 
