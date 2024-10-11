@@ -1,10 +1,7 @@
-﻿using PROG3B_23023;
+﻿using PROG3B_2023;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,16 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PROG3B_2023
+namespace PROG3B_23023
 {
     /// <summary>
-    /// Interaction logic for Identify.xaml
+    /// Interaction logic for MatchTheColumn.xaml
     /// </summary>
-    public partial class Identify : Window
+    public partial class MatchTheColumn : Page
     {
-        public Identify()
+        public MatchTheColumn()
         {
             InitializeComponent();
         }
@@ -34,12 +32,6 @@ namespace PROG3B_2023
         int count = 0;
         int progcount;
         string question, answer;
-
-        private void MainMenu_Click(object sender, RoutedEventArgs e)
-        {
-            MainMenu();
-            
-        }
 
 
         private void Instruction_Click(object sender, RoutedEventArgs e)
@@ -200,7 +192,7 @@ namespace PROG3B_2023
             }
 
             //Assigns the descriptions in a random order
-            for (int i = 0;i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 int randomNumber = rand.Next(randomQuestion);
 
@@ -234,14 +226,14 @@ namespace PROG3B_2023
                 var selectedQuestion = Question.SelectedItems[0];
                 question = selectedQuestion.ToString();
             }
-            if(Answer.SelectedItems.Count > 0)
+            if (Answer.SelectedItems.Count > 0)
             {
                 //gets the value from the listview and stores it in a variable
                 var selectedAnswer = Answer.SelectedItems[0];
                 answer = selectedAnswer.ToString();
             }
         }
-        
+
         //Checks to see that items from both columns have been selected
         void CanMark()
         {
@@ -263,7 +255,8 @@ namespace PROG3B_2023
             Dictionary dict = new Dictionary();
             dict.GenerateDictionary();
             string value;
-            if (count == 1) {
+            if (count == 1)
+            {
 
                 KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(question, answer);
                 //Gets the correct value from the dictionary
@@ -292,13 +285,13 @@ namespace PROG3B_2023
                 {
                     MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-               
+
             }
             else
             {
                 KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(answer, question);
                 dict.Identifies.TryGetValue(kvp.Key, out value);
-        
+
                 // compares the selected value and the value from the dictionary
                 if (question == value.ToString())
                 {
@@ -308,7 +301,7 @@ namespace PROG3B_2023
 
                     Question.Items.Remove(kvp.Value);
                     Answer.Items.Remove(kvp.Key);
-                    if(Question.Items.Count == 0)
+                    if (Question.Items.Count == 0)
                     {
                         MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (dialogResult == MessageBoxResult.Yes)
@@ -321,7 +314,7 @@ namespace PROG3B_2023
                 {
                     MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                
+
             }
         }
 
@@ -332,13 +325,6 @@ namespace PROG3B_2023
                 "Instructions", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        //takes the user back to the main menu
-        void MainMenu()
-        {
-            MainWindow main = new MainWindow();
-            main.Show();
-            this.Close();
-        }
-
     }
 }
+
