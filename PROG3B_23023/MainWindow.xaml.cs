@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG3B_23023;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,27 +23,24 @@ namespace PROG3B_2023
         public MainWindow()
         {
             InitializeComponent();
+            Main.Content = new SortingGame();
         }
 
         private void Replace_Click(object sender, RoutedEventArgs e)
         {
-            // Takes the user to the first game
-            Replace replace = new Replace();
-            this.Close();
-            replace.Show();
+            Main.Content = new SortingGame();
         }
 
         private void Identify_Click(object sender, RoutedEventArgs e)
         {
-           
-           Identify identify = new Identify();
-           identify.Show();
-           this.Close();
+
+            Main.Content = new MatchTheColumn();
         }
 
         private void Call_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Game currently in development check back later", "", MessageBoxButton.OK, MessageBoxImage.Hand);
         }
+
     }
 }

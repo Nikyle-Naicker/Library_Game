@@ -60,17 +60,13 @@
     <Compile Include="Finding.xaml.cs">
       <DependentUpon>Finding.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Identify.xaml.cs">
-      <DependentUpon>Identify.xaml</DependentUpon>
+    <Compile Include="MatchTheColumn.xaml.cs">
+      <DependentUpon>MatchTheColumn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Replace.xaml.cs">
-      <DependentUpon>Replace.xaml</DependentUpon>
+    <Compile Include="SortingGame.xaml.cs">
+      <DependentUpon>SortingGame.xaml</DependentUpon>
     </Compile>
     <Page Include="Finding.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Identify.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -87,7 +83,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Replace.xaml">
+    <Page Include="MatchTheColumn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SortingGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

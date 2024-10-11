@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using PROG3B_2023;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PROG3B_2023
+namespace PROG3B_23023
 {
     /// <summary>
-    /// Interaction logic for Replace.xaml
+    /// Interaction logic for SortingGame.xaml
     /// </summary>
-    public partial class Replace : Window
+    public partial class SortingGame : Page
     {
-        public Replace()
+        public SortingGame()
         {
             InitializeComponent();
         }
@@ -34,17 +35,10 @@ namespace PROG3B_2023
         }
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
-            if(Check() == true)
+            if (Check() == true)
             {
                 Mark();
             }
-        }
-        private void MainMenu_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow main = new MainWindow();
-            main.Show();
-            this.Close();
-            
         }
 
         private void Instructions_Click(object sender, RoutedEventArgs e)
@@ -118,11 +112,11 @@ namespace PROG3B_2023
             Numbers numbers = new Numbers();
             numberkeep = numbers.RandomNumber();
             Random random = new Random();
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                int x = random.Next(0, numberkeep.Count-1);
+                int x = random.Next(0, numberkeep.Count - 1);
                 Unsorted.Items.Add(string.Join(" ", numberkeep[x].callNumber, numberkeep[x].Author));
-                numberkeep.RemoveAt(x);   
+                numberkeep.RemoveAt(x);
             }
         }
 
@@ -130,12 +124,12 @@ namespace PROG3B_2023
         bool Check()
         {
             Numbers numbers = new Numbers();
-            if(Unsorted.Items.Count == 0 && Sorted.Items.Count == 0)
+            if (Unsorted.Items.Count == 0 && Sorted.Items.Count == 0)
             {
                 MessageBox.Show("Please click the Start button to begin the game", "Invalid", MessageBoxButton.OK);
                 return false;
             }
-            else if(Sorted.Items.Count < 10)
+            else if (Sorted.Items.Count < 10)
             {
                 MessageBox.Show("Please sort the numbers before clicking mark", "Incomplete", MessageBoxButton.OK);
                 return false;
@@ -145,7 +139,7 @@ namespace PROG3B_2023
 
         /* This method adds the callnumbers back into a list, sorts the callnumbers,
          then it compares two lists to see if they have the same order and displays the result to the user*/
-        void Mark() 
+        void Mark()
         {
             number.Clear();
             numberkeep.Clear();
@@ -158,18 +152,18 @@ namespace PROG3B_2023
                 string author = item.Substring(spaceIndex + 1);
                 number.Add(new CallNumber(callnumber, author));
                 numberkeep.Add(new CallNumber(callnumber, author));
-                
+
             }
             bubbleSort(number);
             int count = 0;
-            for (int i = 0;i < Sorted.Items.Count; i++)
+            for (int i = 0; i < Sorted.Items.Count; i++)
             {
                 if (numberkeep[i].callNumber == number[i].callNumber)
                 {
                     count++;
                 }
             }
-            if (count == 10) 
+            if (count == 10)
             {
                 MessageBox.Show("CORRECT", "Correct", MessageBoxButton.OK);
                 Sorted.Items.Clear();
@@ -207,3 +201,4 @@ namespace PROG3B_2023
         }
     }
 }
+

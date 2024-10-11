@@ -1,11 +1,13 @@
-﻿<Window x:Class="PROG3B_2023.Identify"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PROG3B_2023"
-        mc:Ignorable="d"
-        Title="Identify" Height="450" Width="800">
+﻿<Page x:Class="PROG3B_23023.MatchTheColumn"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PROG3B_23023"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MatchTheColumn">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
@@ -17,7 +19,7 @@
         <TextBlock Text="Identifying Areas" x:Name="Header" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"  />
         <TextBlock Height="30" Grid.Row="3" VerticalAlignment="Center" Panel.ZIndex="1" HorizontalAlignment="Center" TextAlignment="Center" Width="50" FontSize="20" Text="{Binding ElementName=Progress, Path=Value, StringFormat={}{0:0}%}"/>
         <ProgressBar Height="20" Grid.Row="3" 
-                     VerticalAlignment="Center" MaxWidth="1200" x:Name="Progress" Margin="150,0,150,0"  />
+                 VerticalAlignment="Center" MaxWidth="1200" x:Name="Progress" Margin="150,0,150,0"  />
         <Grid Grid.Row="2">
             <ListView BorderThickness="2" Margin="5 0 0 0" Name="Question" SelectedItem="{Binding selectedQuestion, Mode=TwoWay}" />
             <ListView Grid.Column="1" BorderThickness="2" Margin="0 0 5 0" x:Name="Answer" SelectedItem="{Binding selectedAnswer, Mode=TwoWay}" />
@@ -31,20 +33,18 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Width="200" Height="30" FontWeight="Bold" FontSize="16" Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="questionHeading"/>
-            <Label Grid.Column="1" Width="200" Height="30" FontWeight="Bold" FontSize="16" Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="answerHeading"/>
+            <Label Width="200" Height="30" FontWeight="Bold" FontSize="16" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="questionHeading"/>
+            <Label Grid.Column="1" Width="200" Height="30" FontWeight="Bold" FontSize="16" HorizontalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="answerHeading"/>
         </Grid>
         <Grid Grid.Row="4" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Width="100px" Height="30px" Content="Main Menu" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MainMenu_Click" />
-            <Button Grid.Column="1" Width="100px" Height="30px" Content="Instructions" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Instruction_Click" />
-            <Button Grid.Column="2" Width="100px" Height="30px" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Load_Click" />
-            <Button Grid.Column="3" Width="100px" Height="30px" Content="Match" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Mark_Click" />
+            <Button  Width="100px" Height="30px" Content="Instructions" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Instruction_Click" />
+            <Button Grid.Column="1" Width="100px" Height="30px" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Load_Click" />
+            <Button Grid.Column="2" Width="100px" Height="30px" Content="Match" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Mark_Click" />
         </Grid>
     </Grid>
-</Window>
+</Page>
