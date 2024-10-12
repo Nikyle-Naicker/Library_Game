@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace PROG3B_23023
 {
@@ -31,7 +32,7 @@ namespace PROG3B_23023
         List<string> answers = new List<string>();
         int count = 0;
         int progcount;
-        string question, answer;
+        string question, answer, difficulty;
 
 
         private void Instruction_Click(object sender, RoutedEventArgs e)
@@ -42,7 +43,23 @@ namespace PROG3B_23023
 
         private void Load_Click(object sender, RoutedEventArgs e)
         {
-            CanQuestionsGenerate();
+            MessageBoxResult result = CustomMessageBox.ShowYesNoCancel("Choose Difficulty", "Difficulty","Easy", "Moderate", "Expert");
+            if(result == MessageBoxResult.Yes)
+            {
+                difficulty = "easy";
+                CanQuestionsGenerate();
+            }
+            else if(result == MessageBoxResult.No)
+            {
+                difficulty = "moderate";
+                CanQuestionsGenerate();
+            }
+            else if(result == MessageBoxResult.Cancel)
+            {
+                difficulty = "expert";
+            }
+            Start.Content = "Change Difficulty";
+            
         }
 
 
@@ -86,7 +103,14 @@ namespace PROG3B_23023
             answers.Clear();
 
             Dictionary dict = new Dictionary();
-            dict.GenerateDictionary();
+            if (difficulty == "easy")
+            {
+                dict.GenerateDictionaryEasy();
+            }
+            else if (difficulty == "moderate")
+            {
+                dict.GenerateDictionaryModerate();
+            }
             int potentialAnswers = 9;
             int randomQuestion = 5;
             int randomAnswer = 8;
@@ -157,11 +181,18 @@ namespace PROG3B_23023
             questions.Clear();
             answers.Clear();
 
-            Dictionary dict = new Dictionary();
             int potentialAnswer = 9;
             int randomQuestion = 5;
             int randomAnswer = 8;
-            dict.GenerateDictionary();
+            Dictionary dict = new Dictionary();
+            if (difficulty == "easy")
+            {
+                dict.GenerateDictionaryEasy();
+            }
+            else if (difficulty == "moderate")
+            {
+                dict.GenerateDictionaryModerate();
+            }
             Random rand = new Random();
 
             questionHeading.Content = "Description";
@@ -253,7 +284,14 @@ namespace PROG3B_23023
         public void Mark()
         {
             Dictionary dict = new Dictionary();
-            dict.GenerateDictionary();
+            if(difficulty == "easy")
+            { 
+                dict.GenerateDictionaryEasy();
+            }
+            else if(difficulty == "moderate")
+            {
+                dict.GenerateDictionaryModerate();
+            }
             string value;
             if (count == 1)
             {

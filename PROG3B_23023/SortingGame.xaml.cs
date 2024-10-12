@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace PROG3B_23023
 {
@@ -107,10 +108,27 @@ namespace PROG3B_23023
 
         void Load()
         {
+            MessageBoxResult result = CustomMessageBox.ShowYesNoCancel("Choose game dificulty", "Dificulty", "Easy", "Moderate", "Expert");
             Unsorted.Items.Clear();
             Sorted.Items.Clear();
             Numbers numbers = new Numbers();
-            numberkeep = numbers.RandomNumber();
+            Dictionary dict = new Dictionary();
+            if (result == MessageBoxResult.Yes)
+            {
+                numberkeep = numbers.RandomNumberEasy();
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                // TODO add moderate difficulty
+                //numberkeep = numbers.RandomNumberModerate();
+                numberkeep = numbers.RandomNumberEasy();
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                // TODO add expert difficulty
+                numberkeep = numbers.RandomNumberEasy();
+            }
+
             Random random = new Random();
             for (int i = 0; i < 10; i++)
             {

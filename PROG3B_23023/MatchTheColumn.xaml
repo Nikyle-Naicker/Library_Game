@@ -43,7 +43,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button  Width="100px" Height="30px" Content="Instructions" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Instruction_Click" />
-            <Button Grid.Column="1" Width="100px" Height="30px" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Load_Click" />
+            <Button Grid.Column="1" Width="100px" Height="30px" x:Name="Start" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Load_Click" />
             <Button Grid.Column="2" Width="100px" Height="30px" Content="Match" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Mark_Click" />
         </Grid>
     </Grid>
