@@ -31,6 +31,7 @@ namespace PROG3B_23023
         List<string> questions = new List<string>();
         List<string> answers = new List<string>();
         int count = 0;
+        int wrongCount = 0;
         int progcount;
         string question, answer, difficulty;
 
@@ -52,7 +53,8 @@ namespace PROG3B_23023
             CanMark();
         }
 
-        /* This method controls whether the application generates classes
+        /* This method sets the difficulty of the game 
+         and controls whether the application generates classes
            or descriptions in the left column.*/
         void CanQuestionsGenerate()
         {
@@ -100,8 +102,8 @@ namespace PROG3B_23023
             }
         }
 
-        /* Generates 5 class numbers with matching descriptions,
-           3 excess descriptions and assigns them to the listviews*/
+        /* Generates class numbers with matching descriptions,
+            excess descriptions and assigns them to the listviews randomly*/
         public void GenerateClasses()
         {
             Question.Items.Clear();
@@ -144,7 +146,7 @@ namespace PROG3B_23023
             questionHeading.Content = "Class Number";
             answerHeading.Content = "Description";
 
-            // Generates the five pairs of descriptions and matching callnumbers
+            // Generates the pairs of descriptions and matching callnumbers
             for (int i = 0; i < randomQuestionLoop; i++)
             {
                 int randomNumber = rand.Next(potentialAnswers);
@@ -196,8 +198,8 @@ namespace PROG3B_23023
             Question.Items.Add(questions[0]);
         }
 
-        /* Generates 5 descriptions with matching class numbers,
-           3 excess class numbers and assigns them to the listviews*/
+        /* Generates descriptions with matching class numbers,
+            excess class numbers and assigns them to the listviews randomly*/
         public void GenerateDescriptions()
         {
 
@@ -373,6 +375,12 @@ namespace PROG3B_23023
                 else
                 {
                     MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
+                    wrongCount++;
+                    if(wrongCount == 3)
+                    {
+                        wrongCount = 0;
+                        Fail();
+                    }
                 }
 
             }
@@ -402,6 +410,12 @@ namespace PROG3B_23023
                 else
                 {
                     MessageBox.Show("Incorrect, Please try again", "Incorrect", MessageBoxButton.OK, MessageBoxImage.Error);
+                    wrongCount++;
+                    if (wrongCount == 3)
+                    {
+                        wrongCount = 0;
+                        Fail();
+                    }
                 }
 
             }
@@ -412,6 +426,16 @@ namespace PROG3B_23023
         {
             MessageBox.Show("Click start for the game to begin, then select a pair of matching values and click match",
                 "Instructions", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        //Displays when user gets three wrong matches
+        void Fail()
+        {
+            MessageBox.Show("Oops, You had one too many wrong answers" + '\n' + "try again", "Game over", MessageBoxButton.OK, MessageBoxImage.Error);
+            Question.Items.Clear();
+            Answer.Items.Clear();
+            Start.Content = "Start";
+            count = 0;
         }
 
     }

@@ -127,10 +127,10 @@ namespace PROG3B_2023
             Identifies.Add("Class 990", "History of other areas");
         }
 
+        //Gets the data from the text file DeweyClasses.txt adds it to the dictionary
         public void GenerateDictionaryExpert()
         {
             //Empties the dictionary
-
             Identifies.Clear();
             var array = File.ReadAllLines("C:\\Users\\NIKYLE\\source\\repos\\PROG3B_23023\\PROG3B_23023\\DeweyClasses.txt");
             for (var i = 0; i < array.Length; i += 2)
