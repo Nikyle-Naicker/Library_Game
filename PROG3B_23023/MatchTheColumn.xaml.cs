@@ -43,23 +43,7 @@ namespace PROG3B_23023
 
         private void Load_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = CustomMessageBox.ShowYesNoCancel("Choose Difficulty", "Difficulty","Easy", "Moderate", "Expert");
-            if(result == MessageBoxResult.Yes)
-            {
-                difficulty = "easy";
-                CanQuestionsGenerate();
-            }
-            else if(result == MessageBoxResult.No)
-            {
-                difficulty = "moderate";
-                CanQuestionsGenerate();
-            }
-            else if(result == MessageBoxResult.Cancel)
-            {
-                difficulty = "expert";
-            }
-            Start.Content = "Change Difficulty";
-            
+            CanQuestionsGenerate();   
         }
 
 
@@ -72,24 +56,47 @@ namespace PROG3B_23023
            or descriptions in the left column.*/
         void CanQuestionsGenerate()
         {
-            count++;
+            
             if (Question.Items.Count < 1)
             {
+                MessageBoxResult result = CustomMessageBox.ShowYesNoCancel("Choose Difficulty", "Difficulty", "Easy", "Moderate", "Expert");
+                if (result == MessageBoxResult.Yes)
+                {
+                    difficulty = "easy";
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    difficulty = "moderate";
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    difficulty = "expert";
+                }
+                else
+                {
+                    difficulty = "easy";
+                }
+                Start.Content = "Change Difficulty";
+
+                count++;
                 progcount = 0;
                 Progress.Value = 0;
                 if (count == 1)
                 {
                     GenerateClasses();
+
                 }
                 else
                 {
                     count = 0;
                     GenerateDescriptions();
                 }
+                
             }
             else
             {
                 MessageBox.Show("Please complete the current questions before loading more", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                
             }
         }
 
@@ -101,26 +108,44 @@ namespace PROG3B_23023
             Answer.Items.Clear();
             questions.Clear();
             answers.Clear();
+            int potentialAnswers, randomQuestion, randomAnswer, randomQuestionLoop, randomAnswerLoop;
 
             Dictionary dict = new Dictionary();
             if (difficulty == "easy")
             {
                 dict.GenerateDictionaryEasy();
+                potentialAnswers = 9;
+                randomQuestion = 5;
+                randomAnswer = 8;
+                randomQuestionLoop = 5;
+                randomAnswerLoop = 8;
             }
             else if (difficulty == "moderate")
             {
                 dict.GenerateDictionaryModerate();
+                potentialAnswers = 87;
+                randomQuestion = 10;
+                randomAnswer = 14;
+                randomQuestionLoop = 10;
+                randomAnswerLoop = 14;
             }
-            int potentialAnswers = 9;
-            int randomQuestion = 5;
-            int randomAnswer = 8;
+            else
+            {
+                dict.GenerateDictionaryExpert();
+                potentialAnswers = 904;
+                randomQuestion = 15;
+                randomAnswer = 20;
+                randomQuestionLoop = 15;
+                randomAnswerLoop = 20;
+            }
+            
             Random rand = new Random();
 
             questionHeading.Content = "Class Number";
             answerHeading.Content = "Description";
 
             // Generates the five pairs of descriptions and matching callnumbers
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < randomQuestionLoop; i++)
             {
                 int randomNumber = rand.Next(potentialAnswers);
 
@@ -134,7 +159,7 @@ namespace PROG3B_23023
             }
 
             //Generates the excess descriptions
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < randomAnswerLoop-randomQuestionLoop; i++)
             {
                 int randomNumber = rand.Next(potentialAnswers);
 
@@ -147,7 +172,7 @@ namespace PROG3B_23023
             }
 
             //Assigns the descriptions in a random order
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < randomAnswerLoop-1; i++)
             {
                 int randomNumber = rand.Next(randomAnswer);
 
@@ -159,7 +184,7 @@ namespace PROG3B_23023
             Answer.Items.Add(answers[0]);
 
             //Assigns the callnumber in a random order
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < randomQuestionLoop-1; i++)
             {
                 int randomNumber = rand.Next(randomQuestion);
 
@@ -181,17 +206,35 @@ namespace PROG3B_23023
             questions.Clear();
             answers.Clear();
 
-            int potentialAnswer = 9;
-            int randomQuestion = 5;
-            int randomAnswer = 8;
+            int potentialAnswers, randomQuestion, randomAnswer, randomQuestionLoop, randomAnswerLoop;
+
             Dictionary dict = new Dictionary();
             if (difficulty == "easy")
             {
                 dict.GenerateDictionaryEasy();
+                potentialAnswers = 9;
+                randomQuestion = 5;
+                randomAnswer = 8;
+                randomQuestionLoop = 5;
+                randomAnswerLoop = 8;
             }
             else if (difficulty == "moderate")
             {
                 dict.GenerateDictionaryModerate();
+                potentialAnswers = 87;
+                randomQuestion = 10;
+                randomAnswer = 14;
+                randomQuestionLoop = 10;
+                randomAnswerLoop = 14;
+            }
+            else
+            {
+                dict.GenerateDictionaryExpert();
+                potentialAnswers = 904;
+                randomQuestion = 15;
+                randomAnswer = 20;
+                randomQuestionLoop = 15;
+                randomAnswerLoop = 20;
             }
             Random rand = new Random();
 
@@ -199,31 +242,31 @@ namespace PROG3B_23023
             answerHeading.Content = "Class Number";
 
             // Generates the five pairs of descriptions and matching callnumbers
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < randomQuestionLoop; i++)
             {
-                int randomNumber = rand.Next(potentialAnswer);
+                int randomNumber = rand.Next(potentialAnswers);
 
                 answers.Add(dict.Identifies.ElementAt(randomNumber).Key);
                 questions.Add(dict.Identifies.ElementAt(randomNumber).Value);
 
                 dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Key);
                 dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Value);
-                potentialAnswer--;
+                potentialAnswers--;
             }
 
             //Generates the excess callnumbers
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < randomAnswerLoop-randomQuestionLoop; i++)
             {
-                int randomNumber = rand.Next(potentialAnswer);
+                int randomNumber = rand.Next(potentialAnswers);
                 answers.Add(dict.Identifies.ElementAt(randomNumber).Key);
 
                 dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Key);
                 dict.Identifies.Remove(dict.Identifies.ElementAt(randomNumber).Value);
-                potentialAnswer--;
+                potentialAnswers--;
             }
 
             //Assigns the descriptions in a random order
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < randomQuestionLoop-1; i++)
             {
                 int randomNumber = rand.Next(randomQuestion);
 
@@ -235,7 +278,7 @@ namespace PROG3B_23023
             Question.Items.Add(questions[0]);
 
             //Assigns the callnumbers in a random order
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < randomAnswerLoop-1; i++)
             {
                 int randomNumber = rand.Next(randomAnswer);
 
@@ -291,6 +334,14 @@ namespace PROG3B_23023
             else if(difficulty == "moderate")
             {
                 dict.GenerateDictionaryModerate();
+            }
+            else if(difficulty == "expert")
+            {
+                dict.GenerateDictionaryExpert();
+            }
+            else
+            {
+                //TODO error catching
             }
             string value;
             if (count == 1)

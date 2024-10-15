@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Ink;
 
 namespace PROG3B_2023
 {
@@ -58,7 +60,7 @@ namespace PROG3B_2023
             Identifies.Add("Class 250", "Christian orders and local church");
             Identifies.Add("Class 260", "Social and ecclesiastical theology");
             Identifies.Add("Class 270", "History of Christianity");
-            Identifies.Add("Class 280", "280 Christian denominations");
+            Identifies.Add("Class 280", "Christian denominations");
             Identifies.Add("Class 290", "Other religions");
             Identifies.Add("Class 310", "Statistics");
             Identifies.Add("Class 320", "Political science");
@@ -124,5 +126,24 @@ namespace PROG3B_2023
             Identifies.Add("Class 980", "History of South America");
             Identifies.Add("Class 990", "History of other areas");
         }
+
+        public void GenerateDictionaryExpert()
+        {
+            //Empties the dictionary
+
+            Identifies.Clear();
+            var array = File.ReadAllLines("C:\\Users\\NIKYLE\\source\\repos\\PROG3B_23023\\PROG3B_23023\\DeweyClasses.txt");
+            for (var i = 0; i < array.Length; i += 2)
+            {
+                string temp = array[i].Trim();
+                string temp2 = array[i + 1].Trim();
+                if (temp.Length != 0 && temp2.Length != 0)
+                {
+                    Identifies.Add(array[i], array[i + 1]);
+                }
+                
+            }
+        }
+
     }
 }
