@@ -32,7 +32,7 @@ namespace PROG3B_23023
         List<string> answers = new List<string>();
         int count = 0;
         int wrongCount = 0;
-        int progcount;
+        int progcount, questionCount;
         string question, answer, difficulty;
 
 
@@ -196,6 +196,7 @@ namespace PROG3B_23023
                 randomQuestion--;
             }
             Question.Items.Add(questions[0]);
+            questionCount = Question.Items.Count;
         }
 
         /* Generates descriptions with matching class numbers,
@@ -290,6 +291,7 @@ namespace PROG3B_23023
                 randomAnswer--;
             }
             Answer.Items.Add(answers[0]);
+            questionCount = Question.Items.Count;
         }
 
 
@@ -316,7 +318,15 @@ namespace PROG3B_23023
             GetSelectedValues();
             if (question != null && answer != null)
             {
-                Mark();
+                try
+                {
+                    Mark();
+                }
+                catch
+                {
+
+                }
+                
             }
             else
             {
@@ -328,6 +338,7 @@ namespace PROG3B_23023
          * to the user*/
         public void Mark()
         {
+            
             Dictionary dict = new Dictionary();
             if(difficulty == "easy")
             { 
@@ -343,7 +354,7 @@ namespace PROG3B_23023
             }
             else
             {
-                //TODO error catching
+                throw new Exception("Difficulty error encountered");
             }
             string value;
             if (count == 1)
@@ -362,7 +373,8 @@ namespace PROG3B_23023
 
                     Question.Items.Remove(kvp.Key);
                     Answer.Items.Remove(kvp.Value);
-                    Progress.Value = progcount * 20;
+
+                    Progress.Value = 100/ questionCount * progcount;
                     if (Question.Items.Count == 0)
                     {
                         MessageBoxResult dialogResult = MessageBox.Show("Would you like to play again", "Play again?", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -394,7 +406,7 @@ namespace PROG3B_23023
                 {
                     MessageBox.Show("Correct");
                     progcount++;
-                    Progress.Value = progcount * 20;
+                    Progress.Value = 100 / questionCount * progcount;
 
                     Question.Items.Remove(kvp.Value);
                     Answer.Items.Remove(kvp.Key);
@@ -436,6 +448,7 @@ namespace PROG3B_23023
             Answer.Items.Clear();
             Start.Content = "Start";
             count = 0;
+            Progress.Value = 0;
         }
 
     }
