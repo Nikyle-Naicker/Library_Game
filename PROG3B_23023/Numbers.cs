@@ -54,17 +54,21 @@ namespace PROG3B_2023
             StringBuilder strbuilder = new StringBuilder();
             Random random = new Random();
             char letter;
+            int modifier = random.Next(1000, 9999);
             // Generates the random call numbers
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i < 10; i++)
             {
                 builder.Clear();
                 strbuilder.Clear();
-                random.Next(0, 10);
-                for (int x = 0; x <= 5; x++)
+                //random.Next(0, 10);
+
+                builder.Append(modifier);
+                for (int x = 0; x < 5; x++)
                 {
                     var call1 = random.Next(0, 10);
                     builder.Append(call1);
                 }
+                
                 for (int z = 0; z <= 2; z++)
                 {
                     double flt = random.NextDouble();
