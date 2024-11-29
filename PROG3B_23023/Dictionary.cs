@@ -135,11 +135,11 @@ namespace PROG3B_2023
             var array = File.ReadAllLines("C:\\Users\\NIKYLE\\source\\repos\\PROG3B_23023\\PROG3B_23023\\DeweyClasses.txt");
             for (var i = 0; i < array.Length; i += 2)
             {
-                string temp = array[i].Trim();
+                string temp = "Class " + array[i].Trim();
                 string temp2 = array[i + 1].Trim();
                 if (temp.Length != 0 && temp2.Length != 0)
                 {
-                    Identifies.Add(array[i], array[i + 1]);
+                    Identifies.Add(temp, temp2);
                 }
                 
             }
