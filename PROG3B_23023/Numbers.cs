@@ -54,7 +54,7 @@ namespace PROG3B_2023
             StringBuilder strbuilder = new StringBuilder();
             Random random = new Random();
             char letter;
-            int modifier = random.Next(1000, 9999);
+            int modifier = random.Next(100, 999);
             // Generates the random call numbers
             for (int i = 0; i < 10; i++)
             {
@@ -63,7 +63,7 @@ namespace PROG3B_2023
                 //random.Next(0, 10);
 
                 builder.Append(modifier);
-                for (int x = 0; x < 5; x++)
+                for (int x = 0; x < 6; x++)
                 {
                     var call1 = random.Next(0, 10);
                     builder.Append(call1);
@@ -83,5 +83,43 @@ namespace PROG3B_2023
             }
             return nums;
         }
+
+        public List<CallNumber> RandomNumberExpert()
+        {
+            // declarations
+            StringBuilder builder = new StringBuilder();
+            StringBuilder strbuilder = new StringBuilder();
+            Random random = new Random();
+            char letter;
+            int modifier = random.Next(10000, 99999);
+            // Generates the random call numbers
+            for (int i = 0; i < 10; i++)
+            {
+                builder.Clear();
+                strbuilder.Clear();
+                //random.Next(0, 10);
+
+                builder.Append(modifier);
+                for (int x = 0; x < 4; x++)
+                {
+                    var call1 = random.Next(0, 10);
+                    builder.Append(call1);
+                }
+
+                for (int z = 0; z <= 2; z++)
+                {
+                    double flt = random.NextDouble();
+                    int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                    letter = Convert.ToChar(shift + 65);
+                    strbuilder.Append(letter);
+                }
+
+                y = Convert.ToInt32(builder.ToString());
+                // adds the values to the lists
+                nums.Add(new CallNumber(y, strbuilder.ToString()));
+            }
+            return nums;
+        }
+
     }
 }

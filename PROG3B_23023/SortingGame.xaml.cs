@@ -119,14 +119,12 @@ namespace PROG3B_23023
             }
             else if (result == MessageBoxResult.No)
             {
-                // TODO add moderate difficulty
                 numberkeep = numbers.RandomNumberModerate();
-                //numberkeep = numbers.RandomNumberEasy();
             }
             else if (result == MessageBoxResult.Cancel)
             {
                 // TODO add expert difficulty
-                numberkeep = numbers.RandomNumberEasy();
+                numberkeep = numbers.RandomNumberExpert();
             }
 
             Random random = new Random();
